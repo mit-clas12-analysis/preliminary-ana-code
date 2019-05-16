@@ -645,10 +645,10 @@ public class dvcspi0_hipo4 {
 		isPI0=false;
 		HELI=0;haz_elec=-1;haz_prot=-1;haz_g1=-1;haz_g2=-1;
 		if(event.hasBank("MC::Event"))isMC=true;
-		if(event.hasBank("REC::Event")){
+		if(event.hasBank("HEL::flip")){
 			
-			if(event.getBank("REC::Event").getInt("helicity",0)==1)HELI=1;
-			if(event.getBank("REC::Event").getInt("helicity",0)==0)HELI=-1;
+			if(event.getBank("HEL::flip").getInt("helicity",0)==1)HELI=1;
+			if(event.getBank("HEL::flip").getInt("helicity",0)==-1)HELI=-1;
 		}
 		if(event.hasBank("REC::Particle"))HasElectron(event.getBank("REC::Particle"));
 		if(haz_elec>-1)MakeProton(event.getBank("REC::Particle"));
