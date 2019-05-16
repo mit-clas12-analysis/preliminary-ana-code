@@ -17,7 +17,7 @@ import org.jlab.clas.physics.LorentzVector;
 import org.jlab.groot.base.GStyle;
 import java.util.Random;
 
-public class dvcspi0 {
+public class dvcspi0_hipo4 {
 	public boolean isMC, isDVCS, isPI0, usePCAL, useFTCAL;
 	public Random myMC;
 	public double EB, HWP;
@@ -55,7 +55,7 @@ public class dvcspi0 {
 	public H1F H_dvcs_phi, H_dvcs_phi_plus, H_dvcs_phi_minus;
 	public H1F H_pi0_phi, H_pi0_phi_plus, H_pi0_phi_minus;
 
-	public dvcspi0(int reqrunNum, float EBreq, int reqNphi, int reqCal) {
+	public dvcspi0_hipo4(int reqrunNum, float EBreq, int reqNphi, int reqCal) {
 		isMC = false;usePCAL=true;useFTCAL=true;
 		myMC = new Random();
 		NPHI = 72;//12;
@@ -858,7 +858,7 @@ public class dvcspi0 {
 			System.out.println("Wrong calorimeter choice! "+CaloChoice+" ... aborting");
 			return;
 		}
-		dvcspi0 ana = new dvcspi0(runNum,EBreq,reqNphi,CaloChoice);
+		dvcspi0_hipo4 ana = new dvcspi0_hipo4(runNum,EBreq,reqNphi,CaloChoice);
                 List<String> toProcessFileNames = new ArrayList<String>();
                 File file = new File(filelist);
                 Scanner read;
