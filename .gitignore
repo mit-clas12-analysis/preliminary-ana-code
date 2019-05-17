@@ -1,1 +1,4 @@
+plots*/*
 plots*
+*.txt
+*.class
