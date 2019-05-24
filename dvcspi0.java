@@ -758,6 +758,7 @@ public class dvcspi0 {
 			MakeParticles(event.getBank("REC::Particle"));
 			//if(IsElastic()){FillElastic(e_sect-1);FillElastic(6);}
 			float TrentoAng = (float)Vangle(Vlept,Vhadr);
+			if((VPROT.vect()).dot(Vlept)<0)TrentoAng=-TrentoAng;
 			H_elec_mom.fill(VE.p());
 			H_prot_mom.fill(VPROT.p());
 			H_phot_mom.fill(VG1.p());
@@ -768,9 +769,9 @@ public class dvcspi0 {
 			H_Q2xB.fill(-VGS.mass2()/(2*0.938*VGS.e()),-VGS.mass2());
 			H_tphi.fill(TrentoAng,-Vmand.mass2());
 			H_MM_eg.fill(VmissP.mass2());
-			H_dvcs_MM_ep.fill(VmissG.mass2());
-			H_dvcs_MM_epg.fill(VMISS.mass2());
-			H_elec_theta_phi.fill(Math.toDegrees(VE.phi())  ,Math.toDegrees(VE.theta()));
+			H_MM_ep.fill(VmissG.mass2());
+			H_MM_epg.fill(VMISS.mass2());
+			H_elec_all_theta_phi.fill(Math.toDegrees(VE.phi())  ,Math.toDegrees(VE.theta()));
 			if(haz_g1>-1)if(KineCut())FillHists();
 		}
 	}
