@@ -65,12 +65,12 @@ public class dvcspi0 {
 	public H1F H_elec_mom, H_prot_mom, H_phot_mom;
 	public H1F H_Q2, H_xB, H_W, H_t;
 	public H2F H_Q2xB, H_tphi;
-	public H2F H_MM_ep, H_MM_eg, H_MM_epg;
+	public H1F H_MM_ep, H_MM_eg, H_MM_epg;
 	public H2F H_elec_all_theta_phi;
 
-	public H1F H_elec_dvcs_mom, H_prot_dvcs_mom, H_phot_dvcs_mom;
+	public H1F H_dvcs_elec_mom, H_dvcs_prot_mom, H_dvcs_phot_mom;
 	public H1F H_dvcs_Q2, H_dvcs_xB, H_dvcs_W, H_dvcs_t;
-	public H2F H_elec_dvcs_theta_phi;
+	public H2F H_dvcs_elec_theta_phi;
 
 	public dvcspi0(int reqrunNum, float EBreq, int reqNphi, int reqCal) {
 		isMC = false;usePCAL=true;useFTCAL=true;
@@ -369,10 +369,10 @@ public class dvcspi0 {
 		H_dvcs_W = new H1F("H_dvcs_W","H_dvcs_W",100,0,EB);
 		H_dvcs_W.setTitleX("DVCS W (GeV)");
 
-		H_elec_dvcs_theta_phi = new H2F("H_elec_dvcs_theta_phi","H_elec_dvcs_theta_phi",100,-180,180,100,0,40);
-		H_elec_dvcs_theta_phi.setTitle("DVCS elec #theta vs #phi");
-		H_elec_dvcs_theta_phi.setTitleX("#phi (^o)");
-		H_elec_dvcs_theta_phi.setTitleY("#theta (^o)");
+		H_dvcs_elec_theta_phi = new H2F("H_dvcs_elec_theta_phi","H_dvcs_elec_theta_phi",100,-180,180,100,0,40);
+		H_dvcs_elec_theta_phi.setTitle("DVCS elec #theta vs #phi");
+		H_dvcs_elec_theta_phi.setTitleX("#phi (^o)");
+		H_dvcs_elec_theta_phi.setTitleY("#theta (^o)");
 
 	}
 	
@@ -678,10 +678,10 @@ public class dvcspi0 {
 			H_dvcs_xB.fill(-VGS.mass2()/(2*0.938*VGS.e()));
 			H_dvcs_W.fill(all_W);
 			H_dvcs_t.fill(-Vmand.mass2());
-			H_elec_dvcs_theta_phi.fill(Math.toDegrees(VE.phi())  ,Math.toDegrees(VE.theta()));
-			H_elec_dvcs_mom.fill(VE.p());
-			H_prot_dvcs_mom.fill(VPROT.p());
-			H_phot_dvcs_mom.fill(VG1.p());
+			H_dvcs_elec_theta_phi.fill(Math.toDegrees(VE.phi())  ,Math.toDegrees(VE.theta()));
+			H_dvcs_elec_mom.fill(VE.p());
+			H_dvcs_prot_mom.fill(VPROT.p());
+			H_dvcs_phot_mom.fill(VG1.p());
 
 		}
 		if(haz_g2>-1){}
@@ -757,6 +757,7 @@ public class dvcspi0 {
 			//fillEBTrack(event);
 			MakeParticles(event.getBank("REC::Particle"));
 			//if(IsElastic()){FillElastic(e_sect-1);FillElastic(6);}
+			float TrentoAng = (float)Vangle(Vlept,Vhadr);
 			H_elec_mom.fill(VE.p());
 			H_prot_mom.fill(VPROT.p());
 			H_phot_mom.fill(VG1.p());
@@ -942,9 +943,9 @@ public class dvcspi0 {
 		dirout.addDataSet(H_dvcs_Q2xB,H_dvcs_tphi,H_dvcs_copl,H_dvcs_MM_eg,H_dvcs_pT,H_dvcs_cone);
 		dirout.addDataSet(H_dvcs_ME,H_dvcs_MM_ep,H_dvcs_MM_epg,H_dvcs_Phi);
 		dirout.addDataSet(g_dvcs_bsa);
-		dirout.addDataSet(H_elec_dvcs_mom, H_prot_dvcs_mom, H_phot_dvcs_mom);
+		dirout.addDataSet(H_dvcs_elec_mom, H_dvcs_prot_mom, H_dvcs_phot_mom);
 		dirout.addDataSet(H_dvcs_Q2, H_dvcs_xB, H_dvcs_W, H_dvcs_t);
-		dirout.addDataSet(H_elec_dvcs_theta_phi);
+		dirout.addDataSet(H_dvcs_elec_theta_phi);
                 dirout.mkdir("/pi0/");
                 dirout.cd("/pi0/");
 		dirout.addDataSet(H_IM_pi0,H_pi0_Q2xB,H_pi0_tphi,H_pi0_copl,H_pi0_MM_epi0,H_pi0_pT,H_pi0_cone);
