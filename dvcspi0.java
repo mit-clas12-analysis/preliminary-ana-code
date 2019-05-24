@@ -27,7 +27,7 @@ public class dvcspi0 {
 	public double prot_mom, prot_theta, prot_phi, prot_vz, prot_beta, prot_phi_sect;
 	public double g1_E, g1_theta, g1_phi, g1_beta;
 	public double g2_E, g2_theta, g2_phi, g2_beta;
-	public double elast_W, elast_EB, elast_bb;
+	public double elast_W, elast_EB, elast_bb, all_W;
 
 	public LorentzVector VB, VT, VE, VGS, VPROT, Vmand, VG1, VG2, VPI0, VMISS, VmissP, VmissG;
 	public Vector3 Vlept, Vhadr, Vhad2;
@@ -50,10 +50,27 @@ public class dvcspi0 {
 
 	public H2F[] H_elast_e_th_mom, H_elast_e_th_phi, H_elast_e_phi_mom;
 	public H2F[] H_elast_p_th_mom, H_elast_p_th_phi, H_elast_p_phi_mom;
-        public H2F[] H_elast_vz_vz, H_elast_W_th, H_elast_W_phi, H_elast_th_th, H_elast_ph_ph, H_elast_EB_bb;
+	public H2F[] H_elast_vz_vz, H_elast_W_th, H_elast_W_phi, H_elast_th_th, H_elast_ph_ph, H_elast_EB_bb;
 
 	public H1F H_dvcs_phi, H_dvcs_phi_plus, H_dvcs_phi_minus;
 	public H1F H_pi0_phi, H_pi0_phi_plus, H_pi0_phi_minus;
+
+	// electron mom, proton mom, photon mom
+	// Q2 xb W, t
+	// Q2 vs W, t vs phi
+	// angle variables theta phi
+	// missing mass ep epgamma
+	// entire, dvcs cut
+
+	public H1F H_elec_mom, H_prot_mom, H_phot_mom;
+	public H1F H_Q2, H_xB, H_W, H_t;
+	public H2F H_Q2xB, H_tphi;
+	public H2F H_MM_ep, H_MM_eg, H_MM_epg;
+	public H2F H_elec_all_theta_phi;
+
+	public H1F H_elec_dvcs_mom, H_prot_dvcs_mom, H_phot_dvcs_mom;
+	public H1F H_dvcs_Q2, H_dvcs_xB, H_dvcs_W, H_dvcs_t;
+	public H2F H_elec_dvcs_theta_phi;
 
 	public dvcspi0(int reqrunNum, float EBreq, int reqNphi, int reqCal) {
 		isMC = false;usePCAL=true;useFTCAL=true;
@@ -288,6 +305,75 @@ public class dvcspi0 {
 		H_pi0_phi_minus = new H1F("H_pi0_phi_minus","H_pi0_phi_minus",NPHI,-180,180);
 		H_pi0_phi_minus.setTitle("#pi^0 #phi counts h-");
 		H_pi0_phi_minus.setTitleX("#phi (^o)");
+
+
+		H_elec_mom = new H1F("H_elec_mom", "H_elec_mom",100, 0, EB);
+		H_elec_mom.setTitle("Electron momentum");
+		H_elec_mom.setTitleX("p(#e) (GeV/c)");
+		H_prot_mom = new H1F("H_prot_mom", "H_prot_mom",100, 0, EB);
+		H_prot_mom.setTitle("Proton momentum");
+		H_prot_mom.setTitleX("p(#p) (GeV/c)");
+		H_phot_mom = new H1F("H_phot_mom", "H_phot_mom",100, 0.5, EB);
+		H_phot_mom.setTitle("Photon momentum");
+		H_phot_mom.setTitleX("p(#gamma) (GeV/c)");
+
+		H_Q2 = new H1F("H_Q2","H_Q2",100,0,12);
+		H_Q2.setTitleX("Q2 (GeV^2)")
+		H_xB = new H1F("H_xB","H_xB",100,0,1);
+		H_xB.setTitleX("xB")
+		H_t = new H1F("H_t","H_t",100,0,5);
+		H_t.setTitleX("-t (GeV^2)")
+		H_W = new H1F("H_W","H_W",100,0,EB);
+		H_W.setTitleX("W (GeV)")
+
+		H_Q2xB = new H2F("H_Q2xB","H_Q2xB",100,0,1,100,0,12);
+		H_Q2xB.setTitle("Q2 vs xB");
+		H_Q2xB.setTitleX("xB");
+		H_Q2xB.setTitleY("Q2 (GeV^2)");
+		H_tphi = new H2F("H_tphi","H_tphi",100,-180,180,100,0,5);
+		H_tphi.setTitle("-t vs #phi");
+		H_tphi.setTitleX("#phi (^o)");
+		H_tphi.setTitleY("-t (GeV^2)");
+
+		H_MM_ep = new H1F("H_MM_ep","H_MM_ep",100,-1,1.2);
+		H_MM_ep.setTitle("ep MM^2");
+		H_MM_ep.setTitleX("ep MM^2 (GeV^2)");
+		H_MM_eg = new H1F("H_MM_eg","H_MM_eg",100,-0.5,4);
+		H_MM_eg.setTitle("e#gamma MM^2");
+		H_MM_eg.setTitleX("e#gamma MM^2 (GeV^2)");
+		H_MM_epg = new H1F("H_MM_epg","H_MM_epg",100,-0.25,0.25);
+		H_MM_epg.setTitle("ep#gamma MM^2");
+		H_MM_epg.setTitleX("ep#gamma MM^2 (GeV^2)");
+
+		H_elec_all_theta_phi = new H2F("H_elec_all_theta_phi","H_elec_all_theta_phi",100,-180,180,100,0,40);
+		H_elec_all_theta_phi.setTitle("elec #theta vs #phi");
+		H_elec_all_theta_phi.setTitleX("#phi (^o)");
+		H_elec_all_theta_phi.setTitleY("#theta (^o)");
+
+		H_dvcs_elec_mom = new H1F("H_dvcs_elec_mom", "H_dvcs_elec_mom",100, 0, EB);
+		H_dvcs_elec_mom.setTitle("DVCS Electron momentum");
+		H_dvcs_elec_mom.setTitleX("p(#e) (GeV/c)");
+		H_dvcs_prot_mom = new H1F("H_dvcs_prot_mom", "H_dvcs_prot_mom",100, 0, EB);
+		H_dvcs_prot_mom.setTitle("DVCS Proton momentum");
+		H_dvcs_prot_mom.setTitleX("p(#p) (GeV/c)");
+		H_dvcs_phot_mom = new H1F("H_dvcs_phot_mom", "H_dvcs_phot_mom",100, 0.5, EB);
+		H_dvcs_phot_mom.setTitle("DVCS Photon momentum");
+		H_dvcs_phot_mom.setTitleX("p(#gamma) (GeV/c)");
+
+		H_dvcs_Q2 = new H1F("H_dvcs_Q2","H_dvcs_Q2",100,0,12);
+		H_dvcs_Q2.setTitleX("DVCS Q2 (GeV^2)")
+		H_dvcs_xB = new H1F("H_dvcs_xB","H_dvcs_xB",100,0,1);
+		H_dvcs_xB.setTitleX("DVCS xB")
+		H_dvcs_t = new H1F("H_dvcs_t","H_dvcs_t",100,0,5);
+		H_dvcs_t.setTitleX("DVCS -t (GeV^2)")
+		H_dvcs_W = new H1F("H_dvcs_W","H_dvcs_W",100,0,EB);
+		H_dvcs_W.setTitleX("DVCS W (GeV)")
+
+		H_elec_dvcs_theta_phi = new H2F("H_elec_dvcs_theta_phi","H_elec_dvcs_theta_phi",100,-180,180,100,0,40);
+		H_elec_dvcs_theta_phi.setTitle("DVCS elec #theta vs #phi");
+		H_elec_dvcs_theta_phi.setTitleX("#phi (^o)");
+		H_elec_dvcs_theta_phi.setTitleY("#theta (^o)");
+
 	}
 	
 	public void setHWP(double val){HWP=val;}
@@ -492,6 +578,11 @@ public class dvcspi0 {
 			Vhad2 = (VGS.vect()).cross(VPI0.vect());
 			g2_beta = recPart.getFloat("beta", p);
 		}
+		LorentzVector W = new LorentzVector(0,0,0,0);
+		W.add(VB);
+		W.add(VT);
+		W.sub(VE);
+		all_W = W.mass();
 	}
 	// VB ; VT ; VE ; VPROT ; Vhadr ; VG1 ; VG2 ; VPI0 ; VmissG
 	// VMISS ; VmissP ; vhad2
@@ -564,6 +655,7 @@ public class dvcspi0 {
 			else HELI = -1;
 		}
 		if(haz_g2==-1){}
+
 		if(isDVCS){
 			H_dvcs_Q2xB.fill(-VGS.mass2()/(2*0.938*VGS.e()),-VGS.mass2());
 			H_dvcs_tphi.fill(TrentoAng,-Vmand.mass2());
@@ -582,6 +674,14 @@ public class dvcspi0 {
 			H_dvcs_phi.fill(TrentoAng);
 			if(HWP*HELI==1)H_dvcs_phi_plus.fill(TrentoAng);
 			if(HWP*HELI==-1)H_dvcs_phi_minus.fill(TrentoAng);
+			H_dvcs_Q2.fill(-VGS.mass2());
+			H_dvcs_xB.fill(-VGS.mass2()/(2*0.938*VGS.e()));
+			H_dvcs_W.fill(all_W);
+			H_dvcs_t.fill(-Vmand.mass2());
+			H_elec_dvcs_theta_phi.fill(Math.toDegrees(VE.phi())  ,Math.toDegrees(VE.theta()));
+			H_elec_dvcs_mom.fill(VE.p());
+			H_prot_dvcs_mom.fill(VPROT.p());
+			H_phot_dvcs_mom.fill(VG1.p());
 
 		}
 		if(haz_g2>-1){}
@@ -657,6 +757,19 @@ public class dvcspi0 {
 			//fillEBTrack(event);
 			MakeParticles(event.getBank("REC::Particle"));
 			//if(IsElastic()){FillElastic(e_sect-1);FillElastic(6);}
+			H_elec_mom.fill(VE.p());
+			H_prot_mom.fill(VPROT.p());
+			H_phot_mom.fill(VG1.p());
+			H_Q2.fill(-VGS.mass2());
+			H_xB.fill(-VGS.mass2()/(2*0.938*VGS.e()));
+			H_W.fill(all_W);
+			H_t.fill(-Vmand.mass2());
+			H_Q2xB.fill(-VGS.mass2()/(2*0.938*VGS.e()),-VGS.mass2());
+			H_tphi.fill(TrentoAng,-Vmand.mass2());
+			H_MM_eg.fill(VmissP.mass2());
+			H_dvcs_MM_ep.fill(VmissG.mass2());
+			H_dvcs_MM_epg.fill(VMISS.mass2());
+			H_elec_theta_phi.fill(Math.toDegrees(VE.phi())  ,Math.toDegrees(VE.theta()));
 			if(haz_g1>-1)if(KineCut())FillHists();
 		}
 	}
@@ -829,10 +942,21 @@ public class dvcspi0 {
 		dirout.addDataSet(H_dvcs_Q2xB,H_dvcs_tphi,H_dvcs_copl,H_dvcs_MM_eg,H_dvcs_pT,H_dvcs_cone);
 		dirout.addDataSet(H_dvcs_ME,H_dvcs_MM_ep,H_dvcs_MM_epg,H_dvcs_Phi);
 		dirout.addDataSet(g_dvcs_bsa);
+		dirout.addDataSet(H_elec_dvcs_mom, H_prot_dvcs_mom, H_phot_dvcs_mom);
+		dirout.addDataSet(H_dvcs_Q2, H_dvcs_xB, H_dvcs_W, H_dvcs_t);
+		dirout.addDataSet(H_elec_dvcs_theta_phi);
                 dirout.mkdir("/pi0/");
                 dirout.cd("/pi0/");
 		dirout.addDataSet(H_IM_pi0,H_pi0_Q2xB,H_pi0_tphi,H_pi0_copl,H_pi0_MM_epi0,H_pi0_pT,H_pi0_cone);
 		dirout.addDataSet(H_pi0_ME,H_pi0_MM_ep,H_pi0_MM_eppi0,H_pi0_Phi);
+		dirout.mkdir("/all/");
+		dirout.cd("/all/");
+		dirout.addDataSet(H_elec_mom, H_prot_mom, H_phot_mom);
+		dirout.addDataSet(H_Q2, H_xB, H_W, H_t);
+		dirout.addDataSet(H_Q2xB, H_tphi);
+		dirout.addDataSet(H_elec_all_theta_phi);
+		dirout.addDataSet(H_MM_ep, H_MM_eg, H_MM_epg);
+
 		if(runNum>0)dirout.writeFile("plots"+runNum+"/dvcspi0_"+runNum+".hipo");
                 else dirout.writeFile("plots/dvcspi0.hipo");
 	}
