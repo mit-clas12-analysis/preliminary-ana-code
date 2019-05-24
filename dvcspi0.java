@@ -318,13 +318,13 @@ public class dvcspi0 {
 		H_phot_mom.setTitleX("p(#gamma) (GeV/c)");
 
 		H_Q2 = new H1F("H_Q2","H_Q2",100,0,12);
-		H_Q2.setTitleX("Q2 (GeV^2)")
+		H_Q2.setTitleX("Q2 (GeV^2)");
 		H_xB = new H1F("H_xB","H_xB",100,0,1);
-		H_xB.setTitleX("xB")
+		H_xB.setTitleX("xB");
 		H_t = new H1F("H_t","H_t",100,0,5);
-		H_t.setTitleX("-t (GeV^2)")
+		H_t.setTitleX("-t (GeV^2)");
 		H_W = new H1F("H_W","H_W",100,0,EB);
-		H_W.setTitleX("W (GeV)")
+		H_W.setTitleX("W (GeV)");
 
 		H_Q2xB = new H2F("H_Q2xB","H_Q2xB",100,0,1,100,0,12);
 		H_Q2xB.setTitle("Q2 vs xB");
@@ -361,13 +361,13 @@ public class dvcspi0 {
 		H_dvcs_phot_mom.setTitleX("p(#gamma) (GeV/c)");
 
 		H_dvcs_Q2 = new H1F("H_dvcs_Q2","H_dvcs_Q2",100,0,12);
-		H_dvcs_Q2.setTitleX("DVCS Q2 (GeV^2)")
+		H_dvcs_Q2.setTitleX("DVCS Q2 (GeV^2)");
 		H_dvcs_xB = new H1F("H_dvcs_xB","H_dvcs_xB",100,0,1);
-		H_dvcs_xB.setTitleX("DVCS xB")
+		H_dvcs_xB.setTitleX("DVCS xB");
 		H_dvcs_t = new H1F("H_dvcs_t","H_dvcs_t",100,0,5);
-		H_dvcs_t.setTitleX("DVCS -t (GeV^2)")
+		H_dvcs_t.setTitleX("DVCS -t (GeV^2)");
 		H_dvcs_W = new H1F("H_dvcs_W","H_dvcs_W",100,0,EB);
-		H_dvcs_W.setTitleX("DVCS W (GeV)")
+		H_dvcs_W.setTitleX("DVCS W (GeV)");
 
 		H_elec_dvcs_theta_phi = new H2F("H_elec_dvcs_theta_phi","H_elec_dvcs_theta_phi",100,-180,180,100,0,40);
 		H_elec_dvcs_theta_phi.setTitle("DVCS elec #theta vs #phi");
