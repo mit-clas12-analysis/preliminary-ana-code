@@ -319,7 +319,7 @@ public class dvcspi0 {
 
 		H_Q2 = new H1F("H_Q2","H_Q2",100,0,12);
 		H_Q2.setTitleX("Q2 (GeV^2)");
-		H_xB = new H1F("H_xB","H_xB",100,0,1);
+		H_xB = new H1F("H_xB","H_xB",20,0,2);
 		H_xB.setTitleX("xB");
 		H_t = new H1F("H_t","H_t",100,0,5);
 		H_t.setTitleX("-t (GeV^2)");
