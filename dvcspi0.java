@@ -88,7 +88,7 @@ public class dvcspi0 {
 		Ndvcs  = 0;
 		Npi0 = 0;
 		VB = new LorentzVector(0,0,EB,EB);
-		VT = new LorentzVector(0,0,0,0.938);
+		VT = new LorentzVector(0,0,0,1.876);
 		H_elec_theta_mom = new H2F("H_elec_theta_mom","H_elec_theta_mom",100,0,EB,100,0,40);
 		H_elec_theta_mom.setTitle("elec #theta vs p");
 		H_elec_theta_mom.setTitleX("p (GeV)");
@@ -750,10 +750,10 @@ public class dvcspi0 {
 			if(event.getBank("REC::Event").getInt("Helic",0)==1)HELI=1;
 			if(event.getBank("REC::Event").getInt("Helic",0)==0)HELI=-1;
 		}
-		if(event.hasBank("REC::Particle"))HasElectron(event.getBank("REC::Particle"));
-		if(haz_elec>-1)MakeProton(event.getBank("REC::Particle"));
-		if(haz_elec>-1 && haz_prot>-1 )MakePhotons(event.getBank("REC::Particle"));
-		if(haz_elec>-1 && haz_prot>-1 && haz_g1>-1){
+		// if(event.hasBank("REC::Particle"))HasElectron(event.getBank("REC::Particle"));
+		// if(haz_elec>-1)MakeProton(event.getBank("REC::Particle"));
+		// if(haz_elec>-1 && haz_prot>-1 )MakePhotons(event.getBank("REC::Particle"));
+		// if(haz_elec>-1 && haz_prot>-1 && haz_g1>-1){
 			//fillEBTrack(event);
 			MakeParticles(event.getBank("REC::Particle"));
 			//if(IsElastic()){FillElastic(e_sect-1);FillElastic(6);}
