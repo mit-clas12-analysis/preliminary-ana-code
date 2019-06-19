@@ -15,8 +15,9 @@
 #include "reader.h"
 #include "node.h"
 #include "clas12event.h"
+#include "dictionary.h"
 
-using namespace std
+using namespace std;
 
 void PrettyTH1F(TH1F * h1,TString titx,TString tity,int color);
 void PrettyTH2F(TH2F * h2,TString titx,TString tity);
@@ -34,6 +35,7 @@ TH1F * h1_e_lu;
 TH1F * h1_e_lv;
 TH1F * h1_e_lw;
 TH1F * h1_p_vz;
+TH1F * h1_p_num;
 TH1F * h1_p_px;
 TH1F * h1_p_py;
 TH1F * h1_p_pz;
