@@ -20,6 +20,7 @@ void PrettyTH1F(TH1F * h1,TString titx,TString tity,int color);
 void PrettyTH2F(TH2F * h2,TString titx,TString tity);
 double fn_Emiss(double Pmiss, double omega, double M_tar, double Enuc, double Mnuc);
 void InitiateHistograms();
+void plot();
 TH1F * h1_e_vz;
 TH1F * h1_e_tof;
 TH1F * h1_e_px;

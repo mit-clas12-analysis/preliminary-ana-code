@@ -59,7 +59,6 @@ int main(int argc, char** argv) {
 	double cut_tof_e   =    10; //ns
 	// ----------------------------------------------------------------------------------
 	// Opening input HIPO file
-
    hipo::reader  reader;
    reader.open(inputFile);
 
@@ -78,7 +77,9 @@ int main(int argc, char** argv) {
    hipo::bank  dataCALO;
 
    hipo::bank PART(factory.getSchema("REC::Particle"));
-   processEvent(event);
+  
+
+    // // processEvent(event);
 	// // particle     particles   ("REC::Particle"    ,reader);
 	// // clas12calorimeter  calo        ("REC::Calorimeter" ,reader);
 	// // BScintillator scintillator("REC::Scintillator",reader);
@@ -279,196 +280,6 @@ int main(int argc, char** argv) {
 
 	// } // End of while loop over events
 
-	// // -------------------------------------------------------------------------------------------
-	// // Drawing histograms
-	// TCanvas * c0 = new TCanvas();
-	// c0 -> Divide(2,1);
-	// c0 -> cd(1);
-	// h1_e_vz -> Draw(      );
-	// h1_p_vz -> Draw("same");
-	// c0 -> cd(2);
-	// h1_dlt_vz_ep   -> Draw(      );
-	// c0 -> Modified();
-	// c0 -> Update();
-
-	// TCanvas * c1 = new TCanvas();
-	// c1 -> Divide(2, 2);
-	// c1 -> cd(1);	h1_pmx  -> Draw();
-	// c1 -> cd(2);	h1_pmy  -> Draw();
-	// c1 -> cd(3);	h1_pmz  -> Draw();
-	// c1 -> cd(4);	h1_pmiss-> Draw();
-	// c1 -> Modified();
-	// c1 -> Update(); 
-
-	// TCanvas * c2 = new TCanvas();
-	// c2 -> Divide(2, 2);
-	// c2 -> cd(1);	h1_e_th     -> Draw(      );
-	// c2 -> cd(2);	h2_e_th_phi -> Draw("COLZ");
-	// c2 -> cd(4);	h1_e_phi    -> Draw(      );
-	// c2 -> Modified();
-	// c2 -> Update();
-
-	// TCanvas * c3 = new TCanvas();
-	// c3 -> Divide(2, 1);
-	// c3 -> cd(1);	h1_W  -> Draw();
-	// c3 -> cd(2);	h1_xB -> Draw();
-	// c3 -> Modified();
-	// c3 -> Update();
-
-	// TCanvas * c5 = new TCanvas();
-	// c5 -> Divide(2,1);
-	// c5 -> cd(1);	gPad -> SetLogz();	h2_e_Ep_p_0 -> Draw("COLZ");
-	// c5 -> cd(2);	gPad -> SetLogz();	h2_e_Ep_p_1 -> Draw("COLZ");
-	// c5 -> Modified();
-	// c5 -> Update();
-
-	// TCanvas * c6 = new TCanvas();
-	// c6 -> Divide(2, 2);
-	// c6 -> cd(1);	h1_e_px -> Draw();
-	// c6 -> cd(2);	h1_e_py -> Draw();
-	// c6 -> cd(3);	h1_e_pz -> Draw();
-	// c6 -> cd(4);	h1_e_p  -> Draw();
-	// c6 -> Modified();
-	// c6 -> Update();
-
-	// TCanvas * c7 = new TCanvas();
-	// c7 -> Divide(2, 2);
-	// c7 -> cd(1);	h1_p_px -> Draw();
-	// c7 -> cd(2);	h1_p_py -> Draw();
-	// c7 -> cd(3);	h1_p_pz -> Draw();
-	// c7 -> cd(4);	h1_p_p  -> Draw();
-	// c7 -> Modified();
-	// c7 -> Update();
-
-	// TCanvas * c8 = new TCanvas();
-	// c8->Divide(2, 1);
-	// c8->cd(1);	gPad -> SetLogz();	h2_beta_p_pos -> Draw("COLZ");
-	// c8->cd(2);	gPad -> SetLogz();	h2_beta_p_p   -> Draw("COLZ");
-	// c8 -> Modified();
-	// c8 -> Update(); 
-
-	// TCanvas * c9 = new TCanvas();
-	// c9 -> Divide(2, 2);
-	// c9 -> cd(1);	h1_p_th    -> Draw(      );
-	// c9 -> cd(2);	h2_p_th_phi-> Draw("COLZ");
-	// c9 -> cd(4);	h1_p_phi   -> Draw(      );
-	// c9 -> Modified();
-	// c9 -> Update();
-
-	// TCanvas * c10 = new TCanvas();
-	// c10 -> Divide(2, 2);
-	// c10 -> cd(1);	h1_e_lu -> Draw();
-	// c10 -> cd(2);	h1_e_lv -> Draw();
-	// c10 -> cd(3);	h1_e_lw -> Draw();
-	// c10 -> Modified();
-	// c10 -> Update();
-
-	// TCanvas * c11 = new TCanvas();
-	// h1_p_num -> Draw();
-	// c11 -> Modified();
-	// c11 -> Update();
-
-	// TCanvas * c12 = new TCanvas();
-	// h1_Mmiss -> Draw();
-	// c12 -> Modified();
-	// c12 -> Update();
-
-	// TCanvas * c13 = new TCanvas();
-	// c13 -> Divide(2,1);
-	// c13 -> cd(1);	h2_e_vz_phi-> Draw("COLZ");
-	// c13 -> cd(2);	h2_p_vz_phi-> Draw("COLZ");
-	// c13 -> Modified();
-	// c13 -> Update();
-
-	// TCanvas * c14 = new TCanvas();
-	// c14 -> Divide(2,1);
-	// c14 -> cd(1);	h1_e_tof  -> Draw(      );
-	// c14 -> cd(2);	h2_e_tof_p-> Draw("COLZ");
-	// c14 -> Modified();
-	// c14 -> Update();
-
-	// TCanvas * c15 = new TCanvas();
-	// c15 -> Divide(2, 1);
-	// c15 -> cd(1);	gPad -> SetLogz();	h2_p_dtT_p_0 -> Draw("COLZ");
-	// c15 -> cd(2);	gPad -> SetLogz();	h2_p_dtT_p_1 -> Draw("COLZ");
-	// c15 -> Modified();
-	// c15 -> Update();
-
-	// TCanvas * c16 = new TCanvas();
-	// h2_p_tof_det -> Draw("COLZ");
-	// c16 -> Modified();
-	// c16 -> Update();
-
-	// TCanvas * c17 = new TCanvas();
-	// h2_p_dtT_det -> Draw("COLZ");
-	// c17 -> Modified();
-	// c17 -> Update();
-
-	// TCanvas * c18 = new TCanvas();
-	// h1_Em -> Draw();
-	// c18 -> Modified();
-	// c18 -> Update();
-
-	// TCanvas * c19 = new TCanvas();
-	// h2_Em_Pm -> Draw("COLZ");
-	// c19 -> Modified();
-	// c19 -> Update();
-
-	// TCanvas * c20 = new TCanvas();
-	// h2_pe_pp -> Draw("COLZ");
-	// c20 -> Modified();
-	// c20 -> Update();
-
-	// TCanvas * c21 = new TCanvas();
-	// h1_pm_th -> Draw();
-	// c21 -> Modified();
-	// c21 -> Update();
-
-	// TCanvas * c22 = new TCanvas();
-	// h1_pm_ph -> Draw();
-	// c22 -> Modified();
-	// c22 -> Update();
-
-	// TCanvas * c23 = new TCanvas();
-	// h2_pe_the -> Draw("COLZ");
-	// c23 -> Modified();
-	// c23 -> Update();
-
-	// TCanvas * c24 = new TCanvas();
-	// c24 -> Divide(2,1);
-	// c24 -> cd(1);	h1_p_th_meas_calc -> Draw();
-	// c24 -> cd(2);	h1_p_p_meas_calc  -> Draw();
-	// c24 -> Modified();
-	// c24 -> Update();
-
-	// // -------------------------------------------------------------------------------------------
-	// // Saving plots to system
-
-	// c0  -> Print("results_eP.pdf(");
-	// c1  -> Print("results_eP.pdf" );
-	// c2  -> Print("results_eP.pdf" );
-	// c3  -> Print("results_eP.pdf" );
-	// c5  -> Print("results_eP.pdf" );
-	// c6  -> Print("results_eP.pdf" );
-	// c7  -> Print("results_eP.pdf" );
-	// c8  -> Print("results_eP.pdf" );
-	// c9  -> Print("results_eP.pdf" );
-	// c10 -> Print("results_eP.pdf" );
-	// c11 -> Print("results_eP.pdf" );
-	// c12 -> Print("results_eP.pdf" );
-	// c13 -> Print("results_eP.pdf" );
-	// c14 -> Print("results_eP.pdf" );
-	// c15 -> Print("results_eP.pdf" );
-	// c16 -> Print("results_eP.pdf" );
-	// c17 -> Print("results_eP.pdf" );
-	// c18 -> Print("results_eP.pdf" );
-	// c19 -> Print("results_eP.pdf" );
-	// c20 -> Print("results_eP.pdf" );
-	// c21 -> Print("results_eP.pdf" );
-	// c22 -> Print("results_eP.pdf" );
-	// c23 -> Print("results_eP.pdf" );
-	// c24 -> Print("results_eP.pdf)");
-
 	myapp -> Run();
 	return 0;
 }
@@ -567,5 +378,198 @@ void InitiateHistograms(){
 	PrettyTH2F(h2_Em_Pm     ,"Pm [GeV]"      ,"Em [GeV]"            );
 	PrettyTH2F(h2_pe_pp     ,"p p [GeV]"     ,"e p [GeV]"           );
 	PrettyTH2F(h2_pe_the    ,"#theta_e [deg]","p_{e} [GeV]"         );
+
+}
+
+void plot(){
+		// -------------------------------------------------------------------------------------------
+	// Drawing histograms
+	TCanvas * c0 = new TCanvas();
+	c0 -> Divide(2,1);
+	c0 -> cd(1);
+	h1_e_vz -> Draw(      );
+	h1_p_vz -> Draw("same");
+	c0 -> cd(2);
+	h1_dlt_vz_ep   -> Draw(      );
+	c0 -> Modified();
+	c0 -> Update();
+
+	TCanvas * c1 = new TCanvas();
+	c1 -> Divide(2, 2);
+	c1 -> cd(1);	h1_pmx  -> Draw();
+	c1 -> cd(2);	h1_pmy  -> Draw();
+	c1 -> cd(3);	h1_pmz  -> Draw();
+	c1 -> cd(4);	h1_pmiss-> Draw();
+	c1 -> Modified();
+	c1 -> Update(); 
+
+	TCanvas * c2 = new TCanvas();
+	c2 -> Divide(2, 2);
+	c2 -> cd(1);	h1_e_th     -> Draw(      );
+	c2 -> cd(2);	h2_e_th_phi -> Draw("COLZ");
+	c2 -> cd(4);	h1_e_phi    -> Draw(      );
+	c2 -> Modified();
+	c2 -> Update();
+
+	TCanvas * c3 = new TCanvas();
+	c3 -> Divide(2, 1);
+	c3 -> cd(1);	h1_W  -> Draw();
+	c3 -> cd(2);	h1_xB -> Draw();
+	c3 -> Modified();
+	c3 -> Update();
+
+	TCanvas * c5 = new TCanvas();
+	c5 -> Divide(2,1);
+	c5 -> cd(1);	gPad -> SetLogz();	h2_e_Ep_p_0 -> Draw("COLZ");
+	c5 -> cd(2);	gPad -> SetLogz();	h2_e_Ep_p_1 -> Draw("COLZ");
+	c5 -> Modified();
+	c5 -> Update();
+
+	TCanvas * c6 = new TCanvas();
+	c6 -> Divide(2, 2);
+	c6 -> cd(1);	h1_e_px -> Draw();
+	c6 -> cd(2);	h1_e_py -> Draw();
+	c6 -> cd(3);	h1_e_pz -> Draw();
+	c6 -> cd(4);	h1_e_p  -> Draw();
+	c6 -> Modified();
+	c6 -> Update();
+
+	TCanvas * c7 = new TCanvas();
+	c7 -> Divide(2, 2);
+	c7 -> cd(1);	h1_p_px -> Draw();
+	c7 -> cd(2);	h1_p_py -> Draw();
+	c7 -> cd(3);	h1_p_pz -> Draw();
+	c7 -> cd(4);	h1_p_p  -> Draw();
+	c7 -> Modified();
+	c7 -> Update();
+
+	TCanvas * c8 = new TCanvas();
+	c8->Divide(2, 1);
+	c8->cd(1);	gPad -> SetLogz();	h2_beta_p_pos -> Draw("COLZ");
+	c8->cd(2);	gPad -> SetLogz();	h2_beta_p_p   -> Draw("COLZ");
+	c8 -> Modified();
+	c8 -> Update(); 
+
+	TCanvas * c9 = new TCanvas();
+	c9 -> Divide(2, 2);
+	c9 -> cd(1);	h1_p_th    -> Draw(      );
+	c9 -> cd(2);	h2_p_th_phi-> Draw("COLZ");
+	c9 -> cd(4);	h1_p_phi   -> Draw(      );
+	c9 -> Modified();
+	c9 -> Update();
+
+	TCanvas * c10 = new TCanvas();
+	c10 -> Divide(2, 2);
+	c10 -> cd(1);	h1_e_lu -> Draw();
+	c10 -> cd(2);	h1_e_lv -> Draw();
+	c10 -> cd(3);	h1_e_lw -> Draw();
+	c10 -> Modified();
+	c10 -> Update();
+
+	TCanvas * c11 = new TCanvas();
+	h1_p_num -> Draw();
+	c11 -> Modified();
+	c11 -> Update();
+
+	TCanvas * c12 = new TCanvas();
+	h1_Mmiss -> Draw();
+	c12 -> Modified();
+	c12 -> Update();
+
+	TCanvas * c13 = new TCanvas();
+	c13 -> Divide(2,1);
+	c13 -> cd(1);	h2_e_vz_phi-> Draw("COLZ");
+	c13 -> cd(2);	h2_p_vz_phi-> Draw("COLZ");
+	c13 -> Modified();
+	c13 -> Update();
+
+	TCanvas * c14 = new TCanvas();
+	c14 -> Divide(2,1);
+	c14 -> cd(1);	h1_e_tof  -> Draw(      );
+	c14 -> cd(2);	h2_e_tof_p-> Draw("COLZ");
+	c14 -> Modified();
+	c14 -> Update();
+
+	TCanvas * c15 = new TCanvas();
+	c15 -> Divide(2, 1);
+	c15 -> cd(1);	gPad -> SetLogz();	h2_p_dtT_p_0 -> Draw("COLZ");
+	c15 -> cd(2);	gPad -> SetLogz();	h2_p_dtT_p_1 -> Draw("COLZ");
+	c15 -> Modified();
+	c15 -> Update();
+
+	TCanvas * c16 = new TCanvas();
+	h2_p_tof_det -> Draw("COLZ");
+	c16 -> Modified();
+	c16 -> Update();
+
+	TCanvas * c17 = new TCanvas();
+	h2_p_dtT_det -> Draw("COLZ");
+	c17 -> Modified();
+	c17 -> Update();
+
+	TCanvas * c18 = new TCanvas();
+	h1_Em -> Draw();
+	c18 -> Modified();
+	c18 -> Update();
+
+	TCanvas * c19 = new TCanvas();
+	h2_Em_Pm -> Draw("COLZ");
+	c19 -> Modified();
+	c19 -> Update();
+
+	TCanvas * c20 = new TCanvas();
+	h2_pe_pp -> Draw("COLZ");
+	c20 -> Modified();
+	c20 -> Update();
+
+	TCanvas * c21 = new TCanvas();
+	h1_pm_th -> Draw();
+	c21 -> Modified();
+	c21 -> Update();
+
+	TCanvas * c22 = new TCanvas();
+	h1_pm_ph -> Draw();
+	c22 -> Modified();
+	c22 -> Update();
+
+	TCanvas * c23 = new TCanvas();
+	h2_pe_the -> Draw("COLZ");
+	c23 -> Modified();
+	c23 -> Update();
+
+	TCanvas * c24 = new TCanvas();
+	c24 -> Divide(2,1);
+	c24 -> cd(1);	h1_p_th_meas_calc -> Draw();
+	c24 -> cd(2);	h1_p_p_meas_calc  -> Draw();
+	c24 -> Modified();
+	c24 -> Update();
+
+	// -------------------------------------------------------------------------------------------
+	// Saving plots to system
+
+	c0  -> Print("results_eP.pdf(");
+	c1  -> Print("results_eP.pdf" );
+	c2  -> Print("results_eP.pdf" );
+	c3  -> Print("results_eP.pdf" );
+	c5  -> Print("results_eP.pdf" );
+	c6  -> Print("results_eP.pdf" );
+	c7  -> Print("results_eP.pdf" );
+	c8  -> Print("results_eP.pdf" );
+	c9  -> Print("results_eP.pdf" );
+	c10 -> Print("results_eP.pdf" );
+	c11 -> Print("results_eP.pdf" );
+	c12 -> Print("results_eP.pdf" );
+	c13 -> Print("results_eP.pdf" );
+	c14 -> Print("results_eP.pdf" );
+	c15 -> Print("results_eP.pdf" );
+	c16 -> Print("results_eP.pdf" );
+	c17 -> Print("results_eP.pdf" );
+	c18 -> Print("results_eP.pdf" );
+	c19 -> Print("results_eP.pdf" );
+	c20 -> Print("results_eP.pdf" );
+	c21 -> Print("results_eP.pdf" );
+	c22 -> Print("results_eP.pdf" );
+	c23 -> Print("results_eP.pdf" );
+	c24 -> Print("results_eP.pdf)");
 
 }
