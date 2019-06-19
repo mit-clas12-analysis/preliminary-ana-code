@@ -11,7 +11,6 @@
 #include "TLorentzVector.h"
 #include "TCanvas.h"
 #include "reader.h"
-#include "clas12event.h"
 #include "dictionary.h"
 
 using namespace std;
