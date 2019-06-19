@@ -11,8 +11,12 @@
 #include "TLorentzVector.h"
 #include "TCanvas.h"
 #include "reader.h"
-#include "clas12event.h"
 #include "dictionary.h"
+#include "particle.h"
+#include "calorimeter.h"
+#include "scintillator.h"
+#include "band.h"
+#include "event.h"
 
 using namespace std;
 

@@ -3,10 +3,10 @@ ROOTLDFLAGS := $(shell root-config --ldflags)
 ROOTLIBS    := $(shell root-config --libs) -lEG
 ROOTGLIBS   := $(shell root-config --glibs)
 
-Clas12Tool := /work/clas12/sangbaek/Clas12Tool_hipo4
+Clas12Tool := /work/clas12/sangbaek/Clas12Tool_hipo
 cdir = $(shell pwd)
 
-HIPOCFLAGS  := -I$(cdir) -I$(Clas12Tool)/Hipo -I$(Clas12Tool)/Banks 
+HIPOCFLAGS  := -I$(cdir) -I$(Clas12Tool)/Hipo -I$(Clas12Tool)/Clas12Banks3 
 HIPOLIBS    := -L$(Clas12Tool)/lib -lhipo -lclas12banks
 
 LZ4LIBS     := -L/group/clas12/packages/lz4/lib -llz4

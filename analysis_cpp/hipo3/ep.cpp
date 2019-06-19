@@ -60,32 +60,12 @@ int main(int argc, char** argv) {
 	// ----------------------------------------------------------------------------------
 	// Opening input HIPO file
 
-   // hipo::reader  reader;
-   // reader.open(inputFile);
-
-   // hipo::dictionary  factory;
-
-   // reader.readDictionary(factory);
-
-   // factory.show();
-   // hipo::structure  particles;
-   // hipo::structure  detectors;
-
-   // hipo::event      event;
-   // int counter = 0;
-
-   // hipo::bank  dataPART;
-   // hipo::bank  dataCALO;
-
-   // hipo::bank PART(factory.getSchema("REC::Particle"));
-    
-
-
-
-    // // processEvent(event);
-	// // particle     particles   ("REC::Particle"    ,reader);
-	// // clas12calorimeter  calo        ("REC::Calorimeter" ,reader);
-	// // BScintillator scintillator("REC::Scintillator",reader);
+    hipo::reader  reader;
+    reader.open(inputFile);
+    event      event;
+	particle     particles   ("REC::Particle"    ,reader);
+	calorimeter  calo        ("REC::Calorimeter" ,reader);
+	BScintillator scintillator("REC::Scintillator",reader);
 
 	// int event_counter = 0;
 	// // ----------------------------------------------------------------------------------
