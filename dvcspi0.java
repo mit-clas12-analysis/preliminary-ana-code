@@ -542,42 +542,42 @@ public class dvcspi0 {
 		prot_phi_sect -= 60f * (p_sect-1);
 		while(prot_phi_sect>60)prot_phi_sect-=60;
 		prot_phi_sect -= 30f - solenoid_scale * kick_1GeV/prot_mom;
-		if(haz_g1>-1){
-			p = haz_g1;
-			px = recPart.getFloat("px", p);
-			py = recPart.getFloat("py", p);
-			pz = recPart.getFloat("pz", p);
-			E = (float)Math.sqrt(px*px+py*py+pz*pz);
-			VG1 = new LorentzVector(px,py,pz,E);
-			Vhad2 = (VGS.vect()).cross(VG1.vect());
-			VmissP = new LorentzVector(0,0,0,0);
-			VmissP.add(VB);
-			VmissP.add(VT);
-			VmissP.sub(VE);
-			VmissP.sub(VG1);
-			VMISS = new LorentzVector(0,0,0,0);
-			VMISS.add(VB);
-			VMISS.add(VT);
-			VMISS.sub(VE);
-			VMISS.sub(VPROT);
-			VMISS.sub(VG1);
-			g1_beta = recPart.getFloat("beta", p);
-		}
-		if(haz_g2>-1){
-			p = haz_g2;
-			px = recPart.getFloat("px", p);
-			py = recPart.getFloat("py", p);
-			pz = recPart.getFloat("pz", p);
-			E = (float)Math.sqrt(px*px+py*py+pz*pz);
-			VG2 = new LorentzVector(px,py,pz,E);
-			VmissP.sub(VG2);
-			VMISS.sub(VG2);
-			VPI0 = new LorentzVector(0,0,0,0);
-			VPI0.add(VG1);
-			VPI0.add(VG2);
-			Vhad2 = (VGS.vect()).cross(VPI0.vect());
-			g2_beta = recPart.getFloat("beta", p);
-		}
+		// if(haz_g1>-1){
+		// 	p = haz_g1;
+		// 	px = recPart.getFloat("px", p);
+		// 	py = recPart.getFloat("py", p);
+		// 	pz = recPart.getFloat("pz", p);
+		// 	E = (float)Math.sqrt(px*px+py*py+pz*pz);
+		// 	VG1 = new LorentzVector(px,py,pz,E);
+		// 	Vhad2 = (VGS.vect()).cross(VG1.vect());
+		// 	VmissP = new LorentzVector(0,0,0,0);
+		// 	VmissP.add(VB);
+		// 	VmissP.add(VT);
+		// 	VmissP.sub(VE);
+		// 	VmissP.sub(VG1);
+		// 	VMISS = new LorentzVector(0,0,0,0);
+		// 	VMISS.add(VB);
+		// 	VMISS.add(VT);
+		// 	VMISS.sub(VE);
+		// 	VMISS.sub(VPROT);
+		// 	VMISS.sub(VG1);
+		// 	g1_beta = recPart.getFloat("beta", p);
+		// }
+		// if(haz_g2>-1){
+		// 	p = haz_g2;
+		// 	px = recPart.getFloat("px", p);
+		// 	py = recPart.getFloat("py", p);
+		// 	pz = recPart.getFloat("pz", p);
+		// 	E = (float)Math.sqrt(px*px+py*py+pz*pz);
+		// 	VG2 = new LorentzVector(px,py,pz,E);
+		// 	VmissP.sub(VG2);
+		// 	VMISS.sub(VG2);
+		// 	VPI0 = new LorentzVector(0,0,0,0);
+		// 	VPI0.add(VG1);
+		// 	VPI0.add(VG2);
+		// 	Vhad2 = (VGS.vect()).cross(VPI0.vect());
+		// 	g2_beta = recPart.getFloat("beta", p);
+		// }
 		LorentzVector W = new LorentzVector(0,0,0,0);
 		W.add(VB);
 		W.add(VT);
