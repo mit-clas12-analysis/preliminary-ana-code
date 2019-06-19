@@ -4,8 +4,9 @@ ROOTLIBS    := $(shell root-config --libs) -lEG
 ROOTGLIBS   := $(shell root-config --glibs)
 
 Clas12Tool := /work/clas12/sangbaek/Clas12Tool_hipo4
+cdir = $(shell pwd)
 
-HIPOCFLAGS  := -I$(Clas12Tool)/Hipo -I$(Clas12Tool)/Banks -I$(Clas12Tool)/Physics
+HIPOCFLAGS  := -I$(cdir) -I$(Clas12Tool)/Hipo -I$(Clas12Tool)/Banks -I$(Clas12Tool)/Physics
 HIPOLIBS    := -L$(Clas12Tool)/lib -lhipo -lclas12banks
 
 LZ4LIBS     := -L/group/clas12/packages/lz4/lib -llz4
@@ -23,7 +24,7 @@ ep: ep.o
 
 clean:
 	@echo 'Removing all build files'
-	@rm -rf *.o epPipPim eppPim bandPhoton2CLAS ePip *~
+	@rm -rf *.o ep *~
 
 %.o: %.cpp
 	$(CXX) -c $< -O2 $(ROOTCFLAGS) $(HIPOCFLAGS) $(LZ4INCLUDES)
