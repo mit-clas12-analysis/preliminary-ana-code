@@ -1,23 +1,4 @@
-#include <cstdlib>
-#include <iostream>
-
-#include "TRint.h"
-#include "TApplication.h"
-#include "TFile.h"
-#include "TTree.h"
-#include "TH1.h"
-#include "TH2.h"
-#include "TMath.h"
-#include "TVector3.h"
-#include "TLorentzVector.h"
-#include "TCanvas.h"
-
-#include "reader.h"
-#include "node.h"
-// #include "bank.h"
-
-using namespace std;
-
+#include <ep.h>
 // Forward-declaring functions
 void PrettyTH1F(TH1F * h1,TString titx,TString tity,int color);
 void PrettyTH2F(TH2F * h2,TString titx,TString tity);
@@ -165,10 +146,24 @@ int main(int argc, char** argv) {
 	// ----------------------------------------------------------------------------------
 	// Opening input HIPO file
 
-	hipo::reader reader;
-	reader.open(inputFile);
+   hipo::reader  reader;
+   reader.open(inputFile);
 
-	clas12::clas12event        event       (reader);
+   hipo::dictionary  factory;
+
+   reader.readDictionary(factory);
+
+   factory.show();
+   hipo::structure  particles;
+   hipo::structure  detectors;
+
+   hipo::event      event;
+   int counter = 0;
+
+   hipo::bank  dataPART;
+   hipo::bank  dataCALO;
+
+   hipo::bank PART(factory.getSchema("REC::Particle"));
 	// // particle     particles   ("REC::Particle"    ,reader);
 	// // clas12calorimeter  calo        ("REC::Calorimeter" ,reader);
 	// // BScintillator scintillator("REC::Scintillator",reader);
