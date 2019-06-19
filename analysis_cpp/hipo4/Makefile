@@ -6,8 +6,8 @@ ROOTGLIBS   := $(shell root-config --glibs)
 Clas12Tool := /work/clas12/sangbaek/Clas12Tool_hipo4
 cdir = $(shell pwd)
 
-HIPOCFLAGS  := -I$(cdir) -I$(Clas12Tool)/Hipo -I$(Clas12Tool)/Banks 
-HIPOLIBS    := -L$(Clas12Tool)/lib -lhipo -lclas12banks
+HIPOCFLAGS  := -I$(cdir) -I$(Clas12Tool)/Hipo4  
+HIPOLIBS    := -L$(Clas12Tool)/lib -lhipo4
 
 LZ4LIBS     := -L/group/clas12/packages/lz4/lib -llz4
 LZ4INCLUDES := -I/group/clas12/packages/lz4/lib
