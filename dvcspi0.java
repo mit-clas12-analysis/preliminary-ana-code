@@ -750,9 +750,10 @@ public class dvcspi0 {
 			if(event.getBank("REC::Event").getInt("Helic",0)==1)HELI=1;
 			if(event.getBank("REC::Event").getInt("Helic",0)==0)HELI=-1;
 		}
-		// if(event.hasBank("REC::Particle"))HasElectron(event.getBank("REC::Particle"));
-		// if(haz_elec>-1)MakeProton(event.getBank("REC::Particle"));
-		// if(haz_elec>-1 && haz_prot>-1 )MakePhotons(event.getBank("REC::Particle"));
+		if(event.hasBank("REC::Particle"))HasElectron(event.getBank("REC::Particle"));
+		if(haz_elec>-1)MakeProton(event.getBank("REC::Particle"));
+		if(haz_elec>-1 && haz_prot>-1 ){
+			MakePhotons(event.getBank("REC::Particle"));
 		// if(haz_elec>-1 && haz_prot>-1 && haz_g1>-1){
 			//fillEBTrack(event);
 			MakeParticles(event.getBank("REC::Particle"));
@@ -772,7 +773,7 @@ public class dvcspi0 {
 			H_MM_ep.fill(VmissG.mass2());
 			H_MM_epg.fill(VMISS.mass2());
 			H_elec_all_theta_phi.fill(Math.toDegrees(VE.phi())  ,Math.toDegrees(VE.theta()));
-			if(haz_g1>-1)if(KineCut())FillHists();
+			// if(haz_g1>-1)if(KineCut())FillHists();
 		}
 	}
 		
