@@ -85,28 +85,28 @@ double elast_W, elast_EB, elast_bb, all_W;
 TLorentzVector VB, VT, VE, VGS, VPROT, Vmand, VG1, VG2, VPI0, VMISS, VmissP, VmissG;
 TVector3 Vlept, Vhadr, Vhad2;
 
-TH2F H_elec_theta_mom, H_elec_theta_phi, H_elec_phi_mom;
-TH2F H_prot_theta_mom, H_prot_theta_phi, H_prot_phi_mom;
-TH2F H_g_theta_E, H_g_theta_phi, H_g_phi_E;
-TH2F H_g1_theta_E, H_g1_theta_phi, H_g1_phi_E;
-TH2F H_g2_theta_E, H_g2_theta_phi, H_g2_phi_E;
-TH2F H_prot_beta_p, H_prot_e_vz, H_phot_b_p;
+TH2F **H_elec_theta_mom, **H_elec_theta_phi, **H_elec_phi_mom;
+TH2F **H_prot_theta_mom, **H_prot_theta_phi, **H_prot_phi_mom;
+TH2F **H_g_theta_E, **H_g_theta_phi, **H_g_phi_E;
+TH2F **H_g1_theta_E, **H_g1_theta_phi, *H_g1_phi_E;
+TH2F *H_g2_theta_E, *H_g2_theta_phi, *H_g2_phi_E;
+TH2F *H_prot_beta_p, *H_prot_e_vz, *H_phot_b_p;
 
-TH2F H_prot_miss_phi, H_phot_elec_angle, H_phot_virt_angle;
-TH2F H_prot_pi0_miss_phi, H_pi0_elec_angle, H_pi0_virt_angle;
+TH2F *H_prot_miss_phi, *H_phot_elec_angle, *H_phot_virt_angle;
+TH2F *H_prot_pi0_miss_phi, *H_pi0_elec_angle, *H_pi0_virt_angle;
 
-TH2F H_dvcs_Q2xB, H_dvcs_tphi;
-TH1F H_dvcs_pT, H_dvcs_cone, H_dvcs_copl, H_dvcs_ME, H_dvcs_MM_ep, H_dvcs_MM_eg, H_dvcs_MM_epg, H_dvcs_Phi;
-TH2F H_pi0_Q2xB, H_pi0_tphi, H_gg_open_E;
-TH1F H_pi0_pT, H_pi0_cone, H_pi0_copl, H_pi0_ME, H_pi0_MM_ep, H_pi0_MM_epi0, H_pi0_MM_eppi0, H_pi0_Phi, H_IM_pi0;
+TH2F *H_dvcs_Q2xB, *H_dvcs_tphi;
+TH1F *H_dvcs_pT, *H_dvcs_cone, *H_dvcs_copl, *H_dvcs_ME, *H_dvcs_MM_ep, *H_dvcs_MM_eg, *H_dvcs_MM_epg, *H_dvcs_Phi;
+TH2F *H_pi0_Q2xB, *H_pi0_tphi, *H_gg_open_E;
+TH1F *H_pi0_pT, *H_pi0_cone, *H_pi0_copl, *H_pi0_ME, *H_pi0_MM_ep, *H_pi0_MM_epi0, *H_pi0_MM_eppi0, *H_pi0_Phi, *H_IM_pi0;
 	GraphErrors g_dvcs_bsa;
 
-TH2F[] H_elast_e_th_mom, H_elast_e_th_phi, H_elast_e_phi_mom;
-TH2F[] H_elast_p_th_mom, H_elast_p_th_phi, H_elast_p_phi_mom;
-TH2F[] H_elast_vz_vz, H_elast_W_th, H_elast_W_phi, H_elast_th_th, H_elast_ph_ph, H_elast_EB_bb;
+TH2F[] *H_elast_e_th_mom, *H_elast_e_th_phi, *H_elast_e_phi_mom;
+TH2F[] *H_elast_p_th_mom, *H_elast_p_th_phi, *H_elast_p_phi_mom;
+TH2F[] *H_elast_vz_vz, *H_elast_W_th, *H_elast_W_phi, *H_elast_th_th, *H_elast_ph_ph, *H_elast_EB_bb;
 
-TH1F H_dvcs_phi, H_dvcs_phi_plus, H_dvcs_phi_minus;
-TH1F H_pi0_phi, H_pi0_phi_plus, H_pi0_phi_minus;
+TH1F *H_dvcs_phi, *H_dvcs_phi_plus, *H_dvcs_phi_minus;
+TH1F *H_pi0_phi, *H_pi0_phi_plus, *H_pi0_phi_minus;
 
 	// electron mom, proton mom, photon mom
 	// Q2 xb W, t
@@ -115,12 +115,12 @@ TH1F H_pi0_phi, H_pi0_phi_plus, H_pi0_phi_minus;
 	// missing mass ep epgamma
 	// entire, dvcs cut
 
-TH1F H_elec_mom, H_prot_mom, H_phot_mom;
-TH1F H_Q2, H_xB, H_W, H_t;
-TH2F H_Q2xB, H_tphi;
-TH1F H_MM_ep, H_MM_eg, H_MM_epg;
-TH2F H_elec_all_theta_phi;
+TH1F *H_elec_mom, *H_prot_mom, *H_phot_mom;
+TH1F *H_Q2, *H_xB, *H_W, *H_t;
+TH2F *H_Q2xB, *H_tphi;
+TH1F *H_MM_ep, *H_MM_eg, *H_MM_epg;
+TH2F *H_elec_all_theta_phi;
 
-TH1F H_dvcs_elec_mom, H_dvcs_prot_mom, H_dvcs_phot_mom;
-TH1F H_dvcs_Q2, H_dvcs_xB, H_dvcs_W, H_dvcs_t;
-TH2F H_dvcs_elec_theta_phi;
+TH1F *H_dvcs_elec_mom, *H_dvcs_prot_mom, *H_dvcs_phot_mom;
+TH1F *H_dvcs_Q2, *H_dvcs_xB, *H_dvcs_W, *H_dvcs_t;
+TH2F *H_dvcs_elec_theta_phi;
