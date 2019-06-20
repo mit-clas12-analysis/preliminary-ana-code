@@ -101,9 +101,9 @@ TH2F *H_pi0_Q2xB, *H_pi0_tphi, *H_gg_open_E;
 TH1F *H_pi0_pT, *H_pi0_cone, *H_pi0_copl, *H_pi0_ME, *H_pi0_MM_ep, *H_pi0_MM_epi0, *H_pi0_MM_eppi0, *H_pi0_Phi, *H_IM_pi0;
 	GraphErrors g_dvcs_bsa;
 
-TH2F[] *H_elast_e_th_mom, *H_elast_e_th_phi, *H_elast_e_phi_mom;
-TH2F[] *H_elast_p_th_mom, *H_elast_p_th_phi, *H_elast_p_phi_mom;
-TH2F[] *H_elast_vz_vz, *H_elast_W_th, *H_elast_W_phi, *H_elast_th_th, *H_elast_ph_ph, *H_elast_EB_bb;
+TH2F *H_elast_e_th_mom[7], *H_elast_e_th_phi[7], *H_elast_e_phi_mom[7];
+TH2F *H_elast_p_th_mom[7], *H_elast_p_th_phi[7], *H_elast_p_phi_mom[7];
+TH2F *H_elast_vz_vz[7], *H_elast_W_th[7], *H_elast_W_phi[7], *H_elast_th_th[7], *H_elast_ph_ph[7], *H_elast_EB_bb[7];
 
 TH1F *H_dvcs_phi, *H_dvcs_phi_plus, *H_dvcs_phi_minus;
 TH1F *H_pi0_phi, *H_pi0_phi_plus, *H_pi0_phi_minus;

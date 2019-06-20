@@ -578,18 +578,6 @@ void InitiateHistograms(){
 		H_IM_pi0->SetTitle("DV#pi^0 #gamma#gamma IM");
 		H_IM_pi0->GetXaxis()->SetTitle("#gamma#gamma IM (GeV)");
 
-		H_elast_e_th_mom = new TH2F[7];
-		H_elast_e_th_phi = new TH2F[7];
-		H_elast_e_phi_mom = new TH2F[7];
-		H_elast_W_th = new TH2F[7];
-		H_elast_W_phi = new TH2F[7];
-		H_elast_p_th_mom = new TH2F[7];
-		H_elast_p_th_phi = new TH2F[7];
-		H_elast_p_phi_mom = new TH2F[7];
-		H_elast_th_th = new TH2F[7];
-		H_elast_ph_ph = new TH2F[7];
-		H_elast_EB_bb = new TH2F[7];
-		H_elast_vz_vz = new TH2F[7];
 		for(int s=0;s<7;s++){
 			H_elast_e_th_mom[s] = new TH2F(String.format("H_elast_e_th_mom_S%d",s),String.format("S%d e #theta vs mom",s),100,0,EB,100,0,40);
 			H_elast_e_th_phi[s] = new TH2F(String.format("H_elast_e_th_phi_S%d",s),String.format("S%d e #theta vs #phi",s),100,-60,60,100,0,40);
