@@ -577,20 +577,19 @@ void InitiateHistograms(){
 		H_IM_pi0 = new TH1F("H_IM_pi0","H_IM_pi0",100,0,0.25);
 		H_IM_pi0->SetTitle("DV#pi^0 #gamma#gamma IM");
 		H_IM_pi0->GetXaxis()->SetTitle("#gamma#gamma IM (GeV)");
-
 		for(int s=0;s<7;s++){
-			H_elast_e_th_mom[s] = new TH2F(String.format("H_elast_e_th_mom_S%d",s),String.format("S%d e #theta vs mom",s),100,0,EB,100,0,40);
-			H_elast_e_th_phi[s] = new TH2F(String.format("H_elast_e_th_phi_S%d",s),String.format("S%d e #theta vs #phi",s),100,-60,60,100,0,40);
-			H_elast_e_phi_mom[s] = new TH2F(String.format("H_elast_e_phi_mom_S%d",s),String.format("S%d e #phi vs mom",s),100,0,EB,100,-60,60);
-			H_elast_W_th[s] = new TH2F(String.format("H_elast_W_th_S%d",s),String.format("S%d W vs #theta",s),100,0,40,100,0,4);
-			H_elast_W_phi[s] = new TH2F(String.format("H_elast_W_phi_S%d",s),String.format("S%d W vs #phi",s),100,-60,60,100,0,4);
-			H_elast_p_th_mom[s] = new TH2F(String.format("H_elast_p_th_mom_S%d",s),String.format("S%d p #theta vs mom",s),100,0,4,100,0,70);
-			H_elast_p_th_phi[s] = new TH2F(String.format("H_elast_p_th_phi_S%d",s),String.format("S%d p #theta vs mom",s),100,-90,30,100,0,70);
-			H_elast_p_phi_mom[s] = new TH2F(String.format("H_elast_p_phi_mom_S%d",s),String.format("S%d p #phi vs mom",s),100,0,4,100,-90,30);
-			H_elast_th_th[s] = new TH2F(String.format("H_elast_th_th_S%d",s),String.format("S%d #theta vs #theta",s),100,0,70,100,0,40);
-			H_elast_ph_ph[s] = new TH2F(String.format("H_elast_ph_ph_S%d",s),String.format("S%d #phi vs #phi",s),100,-180,180,100,-180,180);
-			H_elast_EB_bb[s] = new TH2F(String.format("H_elast_EB_bb_S%d",s),String.format("S%d Ebeam vs #Delta#phi",s),100,-180,180,100,0,50);
-			H_elast_vz_vz[s] = new TH2F(String.format("H_elast_vz_vz_S%d",s),String.format("S%d vz p vs vz e",s),100,-25,25,100,-25,25);
+			H_elast_e_th_mom[s] = new TH2F((TString)Form("H_elast_e_th_mom_S%d",s),(TString)Form("S%d e #theta vs mom",s),100,0,EB,100,0,40);
+			H_elast_e_th_phi[s] = new TH2F((TString)Form("H_elast_e_th_phi_S%d",s),(TString)Form("S%d e #theta vs #phi",s),100,-60,60,100,0,40);
+			H_elast_e_phi_mom[s] = new TH2F((TString)Form("H_elast_e_phi_mom_S%d",s),(TString)Form("S%d e #phi vs mom",s),100,0,EB,100,-60,60);
+			H_elast_W_th[s] = new TH2F((TString)Form("H_elast_W_th_S%d",s),(TString)Form("S%d W vs #theta",s),100,0,40,100,0,4);
+			H_elast_W_phi[s] = new TH2F((TString)Form("H_elast_W_phi_S%d",s),(TString)Form("S%d W vs #phi",s),100,-60,60,100,0,4);
+			H_elast_p_th_mom[s] = new TH2F((TString)Form("H_elast_p_th_mom_S%d",s),(TString)Form("S%d p #theta vs mom",s),100,0,4,100,0,70);
+			H_elast_p_th_phi[s] = new TH2F((TString)Form("H_elast_p_th_phi_S%d",s),(TString)Form("S%d p #theta vs mom",s),100,-90,30,100,0,70);
+			H_elast_p_phi_mom[s] = new TH2F((TString)Form("H_elast_p_phi_mom_S%d",s),(TString)Form("S%d p #phi vs mom",s),100,0,4,100,-90,30);
+			H_elast_th_th[s] = new TH2F((TString)Form("H_elast_th_th_S%d",s),(TString)Form("S%d #theta vs #theta",s),100,0,70,100,0,40);
+			H_elast_ph_ph[s] = new TH2F((TString)Form("H_elast_ph_ph_S%d",s),(TString)Form("S%d #phi vs #phi",s),100,-180,180,100,-180,180);
+			H_elast_EB_bb[s] = new TH2F((TString)Form("H_elast_EB_bb_S%d",s),(TString)Form("S%d Ebeam vs #Delta#phi",s),100,-180,180,100,0,50);
+			H_elast_vz_vz[s] = new TH2F((TString)Form("H_elast_vz_vz_S%d",s),(TString)Form("S%d vz p vs vz e",s),100,-25,25,100,-25,25);
 		}
 		H_dvcs_phi = new TH1F("H_dvcs_phi","H_dvcs_phi",NPHI,-180,180);
 		H_dvcs_phi->SetTitle("DVCS #phi counts");
