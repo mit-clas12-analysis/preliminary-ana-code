@@ -847,7 +847,7 @@ void plot(){
 	// -------------------------------------------------------------------------------------------
 	// Saving plots to system
 
-	c0  -> Print("results_eP.pdf(");
+	c0  -> Print("results_eP.pdf" );
 	c1  -> Print("results_eP.pdf" );
 	c2  -> Print("results_eP.pdf" );
 	c3  -> Print("results_eP.pdf" );
@@ -870,6 +870,6 @@ void plot(){
 	c21 -> Print("results_eP.pdf" );
 	c22 -> Print("results_eP.pdf" );
 	c23 -> Print("results_eP.pdf" );
-	c24 -> Print("results_eP.pdf)");
+	c24 -> Print("results_eP.pdf" );
 
 }
