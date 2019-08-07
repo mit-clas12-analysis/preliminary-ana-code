@@ -63,7 +63,7 @@ H_elec_EC_Sampl =(0..<6).collect{
 //H_elec_mom=new H1F("H_elec_mom", "H_elec_mom_S",100, 0, EB);
 
 
-int e_index, e_sect, e_nphe
+int e_part_ind, e_sect, e_nphe
 float e_mom, e_theta, e_phi, e_vx, e_vy, e_vz, e_ecal_E, e_Sampl_frac
 LorentzVector Ve = new LorentzVector()
 
@@ -98,9 +98,9 @@ public void processEvent(DataEvent event) {
 	if(!event.hasBank("REC::Calorimeter")) return 
 	if(!event.hasBank("REC::Cherenkov")) return
 	DataBank partBank = event.getBank("REC::Particle");
-	e_index=-1
+	e_part_ind=-1
 	if (!hasElectron(partBank, event)) return
-	if (e_index>-1){
+	if (e_part_ind>-1){
 		makeElectron(partBank, event)
 		fillHists()
 		//H_elec_mom.fill(e_mom)
@@ -120,7 +120,7 @@ public void fillHists(){
 }
 
 public void makeElectron(DataBank recPart, DataEvent cur_event){
-		int ei=e_index
+		int ei=e_part_ind
 		float px = recPart.getFloat("px",ei)
 		float py = recPart.getFloat("py",ei)
 		float pz = recPart.getFloat("pz",ei)
@@ -146,7 +146,7 @@ public void makeElectron(DataBank recPart, DataEvent cur_event){
 		}
 		DataBank ECALbank = cur_event.getBank("REC::Calorimeter")
 		for(int l = 0; l < ECALbank.rows(); l++){
-			if(ECALbank.getShort("pindex",l)==p){
+			if(ECALbank.getShort("pindex",l)==ei){
 				e_ecal_E += ECALbank.getFloat("energy",l);
 			}
 		}
@@ -168,7 +168,7 @@ public boolean hasElectron(DataBank recPart, DataEvent cur_event){
 public boolean isElectron(DataBank recPart, DataEvent cur_event, int p){
 	if (CC_nphe_cut(recPart,cur_event,p) && EC_sampling_fraction_cut(recPart,cur_event,p)&& ele_default_PID_cut(recPart,p)&& ele_charge_cut(recPart,p) && ele_kine_cut(recPart,p)&& inDC(recPart,p)){
 		//System.out.println("Electron Found!")
-		e_index=p
+		e_part_ind=p
 		return true
 	}
 	else return false
