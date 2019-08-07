@@ -50,11 +50,21 @@ H_elec_theta_phi =(0..<6).collect{
 	return h1
 }
 
+H_elec_HTCC_nphe =(0..<6).collect{
+	def h1 = new H1F("H_elec_HTCC_nphe_S"+(it+1), "H_elec_HTCC_nphe_S"+(it+1),100,0,100);
+	return h1
+}
+
+H_elec_EC_Sampl =(0..<6).collect{
+	def h1 = new H1F("H_elec_EC_Sampl_S"+(it+1), "H_elec_EC_Sampl_S"+(it+1),100,0,1);
+	return h1
+}
+
 //H_elec_mom=new H1F("H_elec_mom", "H_elec_mom_S",100, 0, EB);
 
 
-int e_index, e_sect
-float e_mom, e_theta, e_phi, e_vx, e_vy, e_vz
+int e_index, e_sect, e_nphe
+float e_mom, e_theta, e_phi, e_vx, e_vy, e_vz, e_ecal_E, e_Sampl_frac
 LorentzVector Ve = new LorentzVector()
 
 filenum=-1
@@ -76,6 +86,8 @@ for (arg in args){
 	out.addDataSet(H_elec_theta_mom[it])
 	out.addDataSet(H_elec_phi_mom[it])
 	out.addDataSet(H_elec_theta_phi[it])
+	out.addDataSet(H_elec_HTCC_nphe[it])
+	out.addDataSet(H_elec_EC_Sampl[it])
 }
 
 //out.addDataSet(H_elec_mom)
@@ -83,6 +95,8 @@ out.writeFile('electron_pID_'+run+'.hipo')
 
 public void processEvent(DataEvent event) {
 	if(!event.hasBank("REC::Particle")) return 
+	if(!event.hasBank("REC::Calorimeter")) return 
+	if(!event.hasBank("REC::Cherenkov")) return
 	DataBank partBank = event.getBank("REC::Particle");
 	e_index=-1
 	if (!hasElectron(partBank, event)) return
@@ -101,6 +115,8 @@ public void fillHists(){
 	H_elec_theta_mom[e_sect-1].fill(e_mom,e_theta)
 	H_elec_phi_mom[e_sect-1].fill(e_mom,e_phi)
 	H_elec_theta_phi[e_sect-1].fill(e_phi,e_theta);
+	H_elec_HTCC_nphi[e_sect-1].fill(e_nphe)
+	H_elec_EC_Sampl[e_sect-1].fill(e_Sampl_frac)
 }
 
 public void makeElectron(DataBank recPart){
@@ -121,6 +137,22 @@ public void makeElectron(DataBank recPart){
 		Ve = new LorentzVector(px,py,pz,e_mom)
 		e_phi = (float) Math.toDegrees(Ve.phi())
 		e_theta = (float) Math.toDegrees(Ve.theta())
+
+		for(int l = 0; l < HTCCbank.rows(); l++){
+			if(HTCCbank.getShort("pindex",l)==ei && HTCCbank.getInt("detector",l)==15){
+				//HTCCnphe = HTCCbank.getInt("nphe",l);
+				e_nphe = (int) HTCCbank.getFloat("nphe",l);
+			}
+		}
+
+		e_ecal_E=-1
+		for(int l = 0; l < ECALbank.rows(); l++){
+			if(ECALbank.getShort("pindex",l)==p){
+				e_ecal_E += ECALbank.getFloat("energy",l);
+			}
+		}
+		float e_Sampl_frac = e_ecal_E/mom
+
 }
 
 public boolean hasElectron(DataBank recPart, DataEvent cur_event){
@@ -155,13 +187,13 @@ public boolean EC_sampling_fraction_cut(DataBank recPart, DataEvent cur_event, i
 	float vz = recPart.getFloat("vz", p);
 	float mom = (float)Math.sqrt(px*px+py*py+pz*pz);
 	DataBank ECALbank = cur_event.getBank("REC::Calorimeter")
-	float e_ecal_E=0
+	float ecal_E=0
 	for(int l = 0; l < ECALbank.rows(); l++){
 		if(ECALbank.getShort("pindex",l)==p){
-			e_ecal_E += ECALbank.getFloat("energy",l);
+			ecal_E += ECALbank.getFloat("energy",l);
 		}
 	}
-	float Sampl_frac = e_ecal_E/mom
+	float Sampl_frac = ecal_E/mom
 	if (Sampl_frac>0.18) return true
 	else return false
 }
