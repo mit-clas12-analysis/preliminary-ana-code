@@ -146,12 +146,13 @@ public void makeElectron(DataBank recPart, DataEvent cur_event){
 		}
 		DataBank ECALbank = cur_event.getBank("REC::Calorimeter")
 
-		e_ecal_E=-1
+		ecal_E=-1
 		for(int l = 0; l < ECALbank.rows(); l++){
 			if(ECALbank.getShort("pindex",l)==ei){
-				e_ecal_E += ECALbank.getFloat("energy",l);
+				ecal_E += ECALbank.getFloat("energy",l);
 			}
 		}
+		e_ecal_E=ecal_E
 		e_Sampl_frac = e_ecal_E/e_mom
 
 }
