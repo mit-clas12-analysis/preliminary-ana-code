@@ -101,7 +101,7 @@ public void processEvent(DataEvent event) {
 	e_index=-1
 	if (!hasElectron(partBank, event)) return
 	if (e_index>-1){
-		makeElectron(partBank)
+		makeElectron(partBank, event)
 		fillHists()
 		//H_elec_mom.fill(e_mom)
 	}
