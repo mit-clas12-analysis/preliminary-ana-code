@@ -155,6 +155,7 @@ public boolean EC_sampling_fraction_cut(DataBank recPart, DataEvent cur_event, i
 	float vz = recPart.getFloat("vz", p);
 	float mom = (float)Math.sqrt(px*px+py*py+pz*pz);
 	DataBank ECALbank = cur_event.getBank("REC::Calorimeter")
+	float e_ecal_E=0
 	for(int l = 0; l < ECALbank.rows(); l++){
 		if(ECALbank.getShort("pindex",l)==p){
 			e_ecal_E += ECALbank.getFloat("energy",l);
