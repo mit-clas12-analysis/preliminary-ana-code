@@ -161,7 +161,7 @@ public boolean EC_sampling_fraction_cut(DataBank recPart, DataEvent cur_event, i
 			e_ecal_E += ECALbank.getFloat("energy",l);
 		}
 	}
-	float Sampl_frac = e_ecal_E/e_mom
+	float Sampl_frac = e_ecal_E/mom
 	if (Sampl_frac>0.18) return true
 	else return false
 }
