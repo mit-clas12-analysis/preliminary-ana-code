@@ -115,7 +115,7 @@ public void makeElectron(DataBank recPart){
 		e_phi = (float)Math.toDegrees(Math.atan2(py,px))
 		if(e_phi<0) e_phi+=360;
 		e_phi=360-e_phi;
-		e_phi=e_phi-150;
+		e_phi=e_phi-140;
 		if (e_phi<0) e_phi+=360;
 		e_sect = (int) Math.ceil(e_phi/60);
 		Ve = new LorentzVector(px,py,pz,e_mom)
@@ -135,7 +135,7 @@ public boolean hasElectron(DataBank recPart){
 }
 
 public boolean isElectron(DataBank recPart, int p){
-	if (ele_default_PID_cut(recPart,p)&& ele_charge_cut(recPart,p) && ele_kine_cut(recPart,p)&& inDC(recPart,p)){
+	if (CC_cut(recPart,event,p) && EC_Samp_cut(recPart,event,p)&& ele_default_PID_cut(recPart,p)&& ele_charge_cut(recPart,p) && ele_kine_cut(recPart,p)&& inDC(recPart,p)){
 		//System.out.println("Electron Found!")
 		e_index=p
 		return true
@@ -143,10 +143,43 @@ public boolean isElectron(DataBank recPart, int p){
 	else return false
 }
 
+// pID function
+// Cherenkov, Calo cut needed
+// edep proportional to e_mom from DC
+// ~30% ratio cut, Sampling fraction
+
+public boolean EC_Samp_cut(DataBank recPart, DataEvent cur_event, int p){
+	float px = recPart.getFloat("px", p);
+	float py = recPart.getFloat("py", p);
+	float pz = recPart.getFloat("pz", p);
+	float vz = recPart.getFloat("vz", p);
+	float mom = (float)Math.sqrt(px*px+py*py+pz*pz);
+	DataBank ECALbank = cur_event.getBank("REC::Calorimeter")
+	for(int l = 0; l < ECALbank.rows(); l++){
+		if(ECALbank.getShort("pindex",l)==p){
+			e_ecal_E += ECALbank.getFloat("energy",l);
+		}
+	}
+	float Sampl_frac = e_ecal_E/e_mom
+	if (Sampl_frac>0.18) return true
+	else return false
+}
+
+public boolean CC_cut(DataBank recPart, DataEvent cur_event, int p){
+	DataBank HTCCbank = cur_event.getBank("REC::Cherenkov");
+	for(int l = 0; l < HTCCbank.rows(); l++){
+		if(HTCCbank.getShort("pindex",l)==p && HTCCbank.getInt("detector",l)==15){
+			//HTCCnphe = HTCCbank.getInt("nphe",l);
+			HTCCnphe = HTCCbank.getFloat("nphe",l);
+		}
+	}
+	if (HTCCnphe>1) return true
+	else return false
+}
 public boolean inDC(DataBank recPart, int p){
 	int status = recPart.getShort("status", p);
-	if (status<0) status = -status;
-	boolean inDC = (status>=2000 && status<4000);
+	if (status<0) status = -status; // if negative, trigger electron
+	boolean inDC = (status>=2000 && status<4000); // checks FD or CD
 }
 
 
