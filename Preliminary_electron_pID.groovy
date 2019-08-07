@@ -167,6 +167,7 @@ public boolean EC_sampling_fraction_cut(DataBank recPart, DataEvent cur_event, i
 
 public boolean CC_nphe_cut(DataBank recPart, DataEvent cur_event, int p){
 	DataBank HTCCbank = cur_event.getBank("REC::Cherenkov");
+	HTCCnphe=-1
 	for(int l = 0; l < HTCCbank.rows(); l++){
 		if(HTCCbank.getShort("pindex",l)==p && HTCCbank.getInt("detector",l)==15){
 			//HTCCnphe = HTCCbank.getInt("nphe",l);
