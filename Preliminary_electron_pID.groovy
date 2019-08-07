@@ -85,7 +85,7 @@ public void processEvent(DataEvent event) {
 	if(!event.hasBank("REC::Particle")) return 
 	DataBank partBank = event.getBank("REC::Particle");
 	e_index=-1
-	if (!hasElectron(partBank)) return
+	if (!hasElectron(partBank, event)) return
 	if (e_index>-1){
 		makeElectron(partBank)
 		fillHists()
@@ -123,10 +123,10 @@ public void makeElectron(DataBank recPart){
 		e_theta = (float) Math.toDegrees(Ve.theta())
 }
 
-public boolean hasElectron(DataBank recPart){
+public boolean hasElectron(DataBank recPart, DataEvent cur_event){
 	boolean found = false
 	for(int p=0;p<recPart.rows();p++){
-		if (isElectron(recPart,p)){
+		if (isElectron(recPart, cur_event, p)){
 			if (found) System.out.println ("Error, two or more electrons found!")
 			found=true
 		}
@@ -134,8 +134,8 @@ public boolean hasElectron(DataBank recPart){
 	return found
 }
 
-public boolean isElectron(DataBank recPart, int p){
-	if (CC_cut(recPart,event,p) && EC_Samp_cut(recPart,event,p)&& ele_default_PID_cut(recPart,p)&& ele_charge_cut(recPart,p) && ele_kine_cut(recPart,p)&& inDC(recPart,p)){
+public boolean isElectron(DataBank recPart, DataEvent cur_event, int p){
+	if (CC_nphe_cut(recPart,cur_event,p) && EC_sampling_fraction_cut(recPart,cur_event,p)&& ele_default_PID_cut(recPart,p)&& ele_charge_cut(recPart,p) && ele_kine_cut(recPart,p)&& inDC(recPart,p)){
 		//System.out.println("Electron Found!")
 		e_index=p
 		return true
@@ -148,7 +148,7 @@ public boolean isElectron(DataBank recPart, int p){
 // edep proportional to e_mom from DC
 // ~30% ratio cut, Sampling fraction
 
-public boolean EC_Samp_cut(DataBank recPart, DataEvent cur_event, int p){
+public boolean EC_sampling_fraction_cut(DataBank recPart, DataEvent cur_event, int p){
 	float px = recPart.getFloat("px", p);
 	float py = recPart.getFloat("py", p);
 	float pz = recPart.getFloat("pz", p);
@@ -165,7 +165,7 @@ public boolean EC_Samp_cut(DataBank recPart, DataEvent cur_event, int p){
 	else return false
 }
 
-public boolean CC_cut(DataBank recPart, DataEvent cur_event, int p){
+public boolean CC_nphe_cut(DataBank recPart, DataEvent cur_event, int p){
 	DataBank HTCCbank = cur_event.getBank("REC::Cherenkov");
 	for(int l = 0; l < HTCCbank.rows(); l++){
 		if(HTCCbank.getShort("pindex",l)==p && HTCCbank.getInt("detector",l)==15){
