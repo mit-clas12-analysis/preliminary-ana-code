@@ -115,7 +115,7 @@ public void fillHists(){
 	H_elec_theta_mom[e_sect-1].fill(e_mom,e_theta)
 	H_elec_phi_mom[e_sect-1].fill(e_mom,e_phi)
 	H_elec_theta_phi[e_sect-1].fill(e_phi,e_theta);
-	H_elec_HTCC_nphi[e_sect-1].fill(e_nphe)
+	H_elec_HTCC_nphe[e_sect-1].fill(e_nphe)
 	H_elec_EC_Sampl[e_sect-1].fill(e_Sampl_frac)
 }
 
