@@ -119,7 +119,7 @@ public void fillHists(){
 	H_elec_EC_Sampl[e_sect-1].fill(e_Sampl_frac)
 }
 
-public void makeElectron(DataBank recPart){
+public void makeElectron(DataBank recPart, DataEvent cur_event){
 		int ei=e_index
 		float px = recPart.getFloat("px",ei)
 		float py = recPart.getFloat("py",ei)
@@ -137,15 +137,14 @@ public void makeElectron(DataBank recPart){
 		Ve = new LorentzVector(px,py,pz,e_mom)
 		e_phi = (float) Math.toDegrees(Ve.phi())
 		e_theta = (float) Math.toDegrees(Ve.theta())
-
+		DataBank HTCCbank = cur_event.getBank("REC::Cherenkov");
 		for(int l = 0; l < HTCCbank.rows(); l++){
 			if(HTCCbank.getShort("pindex",l)==ei && HTCCbank.getInt("detector",l)==15){
 				//HTCCnphe = HTCCbank.getInt("nphe",l);
 				e_nphe = (int) HTCCbank.getFloat("nphe",l);
 			}
 		}
-
-		e_ecal_E=-1
+		DataBank ECALbank = cur_event.getBank("REC::Calorimeter")
 		for(int l = 0; l < ECALbank.rows(); l++){
 			if(ECALbank.getShort("pindex",l)==p){
 				e_ecal_E += ECALbank.getFloat("energy",l);
