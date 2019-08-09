@@ -1,0 +1,8 @@
+plots*/*
+plots*
+*.txt
+*.class
+*.o
+analysis_cpp/hipo3/ep
+analysis_cpp/hipo4/ep
+*.hipo

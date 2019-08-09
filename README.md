@@ -14,5 +14,8 @@ The argument passed are
 
 The DVCS code actually has a couple more arguments, setting the number of bins in phi, and a flag for which calorimeter to use (0 for all, 1 for FTCal only, 2 for PCal only)
 
-Please let me know if you have questions
-I intend to start writing C++ / ROOT code next
+# groovy pid code
+
+use COATJAVA's coatjava bin run-groovy
+$COATJAVA/bin/run-groovy electron_pID.groovy 5038 `find /path/to/hipo/files/for/one/run`
+You can use run_electron.sh to automate the process.
